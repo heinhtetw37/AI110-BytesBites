@@ -1,0 +1,26 @@
+classDiagram
+    class Customer {
+        -String name
+        -List~Transaction~ purchaseHistory
+    }
+
+    class FoodItem {
+        -String name
+        -float price
+        -String category
+        -float popularityRating
+    }
+
+    class Menu {
+        -List~FoodItem~ items
+        +filterByCategory(category) List~FoodItem~
+    }
+
+    class Transaction {
+        -List~FoodItem~ selectedItems
+        +computeTotal() float
+    }
+
+    Customer "1" o-- "*" Transaction : purchaseHistory
+    Menu "1" o-- "*" FoodItem : contains
+    Transaction "1" --> "*" FoodItem : selectedItems
